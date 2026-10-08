@@ -1,0 +1,13 @@
+ 81 n=None | P7 — подготовка списка для себестоимости
+ 82 n=12 | Запускается команда:
+ 83 n=None | php bin/console app:step-prepare-list-price-command
+ 84 n=13 | Команда вызывает сервис App\Service\Avito\PrepareListPrice.
+ 85 n=13 | Из avito_product_list выбираются все товары (Main::get_avito_product_l
+ 86 n=13 | Таблица prepared_list_price очищается (delete_prepared_list_price).
+ 87 n=14 | Для каждого товара создаётся запись:
+ 88 n=None | product_list_id = avito_product_list.id
+ 89 n=None | product_id      = avito_product_list.avito_id
+ 90 n=None | offer_id        = avito_product_list.ad_id
+ 91 n=None | kol             = 0
+ 92 n=None | price           = 0
+ 93 n=None | Результат P7: staging-таблица prepared_list_price заполнена списком об

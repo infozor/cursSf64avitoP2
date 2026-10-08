@@ -1,0 +1,13 @@
+ 39 n=None | P4 — подготовка списка к обновлению остатков
+ 40 n=12 | Запускается команда:
+ 41 n=None | php bin/console app:step-prepare-list-command
+ 42 n=13 | Команда вызывает сервис App\Service\Avito\PrepareList.
+ 43 n=13 | Из avito_product_list выбираются все товары.
+ 44 n=13 | Таблица prepared_list очищается через:
+ 45 n=None | TRUNCATE TABLE public.prepared_list;
+ 46 n=14 | Для каждого товара создаётся запись:
+ 47 n=None | product_list_id = avito_product_list.id
+ 48 n=None | product_id      = avito_product_list.avito_id
+ 49 n=None | offer_id        = avito_product_list.ad_id
+ 50 n=None | kol             = 0
+ 51 n=None | Результат P4: сформирована таблица prepared_list со списком товаров дл

@@ -1,0 +1,32 @@
+
+=== sf64avitoP2_список_процессов.docx paras=82
+P1 — получение списка товаров Avito
+P2 — получение связки avito_id → ad_id
+P3 — получение текущих остатков из Avito
+P4 — подготовка списка к обновлению остатков
+P5 — получение складских остатков из ViewerClaim
+P6 — обновление остатков на Avito
+
+=== sf64avitoP2_список_процессов_P1-P10.docx paras=132
+P1 — получение списка товаров Avito
+P2 — получение связки avito_id → ad_id
+P3 — получение текущих остатков из Avito
+P4 — подготовка списка к обновлению остатков
+P5 — получение складских остатков из ViewerClaim
+P6 — обновление остатков на Avito
+P7 — подготовка списка для себестоимости (taskp5362, cron ac
+P8 — kol и MinPrice из ViewerClaim (taskp5362, cron active=1
+P9 — экспорт Excel себестоимости (taskp5362, cron active=1)
+P10 — копия файла во внешнюю папку (taskp5362, cron active=1
+
+=== all_processes.docx paras=158
+P1 — получение списка товаров Avito
+P2 — получение связки avito_id → ad_id
+P3 — получение текущих остатков из Avito
+P4 — подготовка списка к обновлению остатков (legacy, cron a
+P5 — получение складских остатков из ViewerClaim (legacy, cr
+P6 — обновление остатков на Avito (legacy, cron active=0)
+P7 — подготовка списка для себестоимости (taskp5362, cron ac
+P8 — kol и MinPrice из ViewerClaim (taskp5362, cron active=1
+P9 — экспорт Excel себестоимости (taskp5362, cron active=1)
+P10 — копия файла во внешнюю папку (taskp5362, cron active=1

@@ -1,0 +1,527 @@
+   0 [Normal] ind=None fi=None
+      TEXT: 'sf64avitoP2 список поцессов'
+      RUN: 'sf' b=True i=None f=Helvetica sz=20.0
+      RUN: '64avitoP2' b=True i=None f=Helvetica sz=20.0
+      RUN: ' список ' b=True i=None f=None sz=20.0
+      RUN: 'поцессов' b=True i=None f=None sz=20.0
+   1 [Normal] ind=None fi=None
+      TEXT: '\nP1 — получение списка товаров Avito'
+      RUN: '
+' b=True i=None f=Times New Roman sz=12.0
+      RUN: 'P1 — получение списка товаров ' b=True i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=True i=None f=Times New Roman sz=12.0
+   2 [Normal] ind=None fi=None
+      TEXT: 'Запускается команда:'
+      RUN: 'Запускается команда:' b=None i=None f=Times New Roman sz=12.0
+   3 [Normal] ind=None fi=None
+      TEXT: 'php bin/console app:get-all-products-command'
+      RUN: 'php' b=None i=None f=Courier New sz=10.0
+      RUN: ' bin/console ' b=None i=None f=Courier New sz=10.0
+      RUN: 'app:get-all-products-command' b=None i=None f=Courier New sz=10.0
+   4 [Normal] ind=None fi=None
+      TEXT: 'Команда вызывает сервис App\\Service\\Avito\\Test2.'
+      RUN: 'Команда вызывает сервис ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'App' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'Service' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'Avito' b=None i=None f=Courier New sz=10.0
+      RUN: '\Test2' b=None i=None f=Courier New sz=10.0
+      RUN: '.' b=None i=None f=Times New Roman sz=12.0
+   5 [Normal] ind=None fi=None
+      TEXT: 'Test2 создаёт AvitoStockApi с personal clientId/clientSecret из config.json.'
+      RUN: 'Test2' b=None i=None f=Courier New sz=10.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'создаёт' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'AvitoStockApi' b=None i=None f=Courier New sz=10.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'с' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      ... +10 runs
+   6 [Normal] ind=None fi=None
+      TEXT: 'Через Avito API вызывается:'
+      RUN: 'Через ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' API вызывается:' b=None i=None f=Times New Roman sz=12.0
+   7 [Normal] ind=None fi=None
+      TEXT: 'GET /core/v1/items?page=N&per_page=100'
+      RUN: 'GET /core/v1/' b=None i=None f=Courier New sz=10.0
+      RUN: 'items' b=None i=None f=Courier New sz=10.0
+      RUN: '?page' b=None i=None f=Courier New sz=10.0
+      RUN: '=' b=None i=None f=Courier New sz=10.0
+      RUN: 'N&per_page' b=None i=None f=Courier New sz=10.0
+      RUN: '=100' b=None i=None f=Courier New sz=10.0
+   8 [Normal] ind=None fi=None
+      TEXT: 'Постранично собираются товары Avito: id, price, status, title, url.'
+      RUN: 'Постранично собираются товары ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=None i=None f=Times New Roman sz=12.0
+      RUN: ': ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'id' b=None i=None f=Courier New sz=10.0
+      RUN: ', ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'price' b=None i=None f=Courier New sz=10.0
+      RUN: ', ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'status' b=None i=None f=Courier New sz=10.0
+      ... +5 runs
+   9 [Normal] ind=None fi=None
+      TEXT: 'Таблица avito_product_list очищается.'
+      RUN: 'Таблица' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'avito_product_list' b=None i=None f=Courier New sz=10.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'очищается' b=None i=None f=Times New Roman sz=12.0
+      RUN: '.' b=None i=None f=Times New Roman sz=12.0
+  10 [Normal] ind=None fi=None
+      TEXT: 'Все полученные товары записываются в avito_product_list, при этом ad_id = 0.'
+      RUN: 'Все полученные товары записываются в ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'avito_product_list' b=None i=None f=Courier New sz=10.0
+      RUN: ', при этом ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'ad_id' b=None i=None f=Courier New sz=10.0
+      RUN: ' = 0' b=None i=None f=Courier New sz=10.0
+      RUN: '.' b=None i=None f=Times New Roman sz=12.0
+  11 [Normal] ind=None fi=None
+      TEXT: 'Результат P1: в avito_product_list лежит свежий список объявлений/товаров Avito. Далее P2 использует avito_id из этой таблицы.'
+      RUN: 'Результат P1: в ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'avito_product_list' b=None i=None f=Courier New sz=10.0
+      RUN: ' лежит свежий список объявлений/товаров ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=None i=None f=Times New Roman sz=12.0
+      RUN: '. Далее P2 использует ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'avito_id' b=None i=None f=Courier New sz=10.0
+      RUN: ' из этой таблицы.' b=None i=None f=Times New Roman sz=12.0
+  12 [Normal] ind=None fi=None
+      TEXT: 'P2 — получение связки avito_id → ad_id'
+      RUN: 'P2 — получение связки ' b=True i=None f=Times New Roman sz=12.0
+      RUN: 'avito_id' b=True i=None f=Times New Roman sz=12.0
+      RUN: ' → ' b=True i=None f=Times New Roman sz=12.0
+      RUN: 'ad_id' b=True i=None f=Times New Roman sz=12.0
+  13 [Normal] ind=None fi=None
+      TEXT: 'Запускается команда:'
+      RUN: 'Запускается команда:' b=None i=None f=Times New Roman sz=12.0
+  14 [Normal] ind=None fi=None
+      TEXT: 'php bin/console app:get_adids-by-avitoids-command'
+      RUN: 'php' b=None i=None f=Courier New sz=10.0
+      RUN: ' bin/console ' b=None i=None f=Courier New sz=10.0
+      RUN: 'app:get_adids-by-avitoids-command' b=None i=None f=Courier New sz=10.0
+  15 [Normal] ind=None fi=None
+      TEXT: 'Команда вызывает сервис App\\Service\\Avito\\AutoloadClient.'
+      RUN: 'Команда вызывает сервис ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'App' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'Service' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'Avito' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'AutoloadClient' b=None i=None f=Courier New sz=10.0
+      ... +1 runs
+  16 [Normal] ind=None fi=None
+      TEXT: 'Из avito_product_list выбираются все avito_id.'
+      RUN: 'Из ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'avito_product_list' b=None i=None f=Courier New sz=10.0
+      RUN: ' выбираются все ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'avito_id' b=None i=None f=Courier New sz=10.0
+      RUN: '.' b=None i=None f=Times New Roman sz=12.0
+  17 [Normal] ind=None fi=None
+      TEXT: 'Создаётся AvitoTokenManager, который берёт OAuth-токен из:'
+      RUN: 'Создаётся ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'AvitoTokenManager' b=None i=None f=Courier New sz=10.0
+      RUN: ', который берёт ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'OAuth-токен' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' из:' b=None i=None f=Times New Roman sz=12.0
+  18 [Normal] ind=None fi=None
+      TEXT: 'src/ModuleAvito/Aion/pdata/avito_token.json'
+      RUN: 'src' b=None i=None f=Courier New sz=10.0
+      RUN: '/' b=None i=None f=Courier New sz=10.0
+      RUN: 'ModuleAvito' b=None i=None f=Courier New sz=10.0
+      RUN: '/' b=None i=None f=Courier New sz=10.0
+      RUN: 'Aion' b=None i=None f=Courier New sz=10.0
+      RUN: '/' b=None i=None f=Courier New sz=10.0
+      RUN: 'pdata' b=None i=None f=Courier New sz=10.0
+      RUN: '/' b=None i=None f=Courier New sz=10.0
+      ... +1 runs
+  19 [Normal] ind=None fi=None
+      TEXT: 'Через Avito Autoload API вызывается:'
+      RUN: 'Через ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'Autoload' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' API вызывается:' b=None i=None f=Times New Roman sz=12.0
+  20 [Normal] ind=None fi=None
+      TEXT: 'GET /autoload/v2/items/ad_ids?query=...'
+      RUN: 'GET /' b=None i=None f=Courier New sz=10.0
+      RUN: 'autoload' b=None i=None f=Courier New sz=10.0
+      RUN: '/v2/items/' b=None i=None f=Courier New sz=10.0
+      RUN: 'ad_ids' b=None i=None f=Courier New sz=10.0
+      RUN: '?query' b=None i=None f=Courier New sz=10.0
+      RUN: '=...' b=None i=None f=Courier New sz=10.0
+  21 [Normal] ind=None fi=None
+      TEXT: 'Если Avito возвращает invalid access token, токен обновляется через refresh token.'
+      RUN: 'Если' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'возвращает' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'invalid access token' b=None i=None f=Courier New sz=10.0
+      RUN: ', ' b=None i=None f=Times New Roman sz=12.0
+      ... +6 runs
+  22 [Normal] ind=None fi=None
+      TEXT: 'Таблица products_map очищается.'
+      RUN: 'Таблица ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'products_map' b=None i=None f=Courier New sz=10.0
+      RUN: ' очищается.' b=None i=None f=Times New Roman sz=12.0
+  23 [Normal] ind=None fi=None
+      TEXT: 'В products_map записываются пары avito_id, ad_id.'
+      RUN: 'В' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'products_map' b=None i=None f=Courier New sz=10.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'записываются' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'пары' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      ... +4 runs
+  24 [Normal] ind=None fi=None
+      TEXT: 'avito_product_list.ad_id обновляется из products_map.'
+      RUN: 'avito_product_list.ad_id' b=None i=None f=Courier New sz=10.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'обновляется' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'из' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'products_map' b=None i=None f=Courier New sz=10.0
+      RUN: '.' b=None i=None f=Times New Roman sz=12.0
+  25 [Normal] ind=None fi=None
+      TEXT: 'Результат P2: у товаров в avito_product_list заполнен ad_id, который дальше используется как профиль/артикул для поиска остатков.'
+      RUN: 'Результат P2: у товаров в ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'avito_product_list' b=None i=None f=Courier New sz=10.0
+      RUN: ' заполнен ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'ad_id' b=None i=None f=Courier New sz=10.0
+      RUN: ', который дальше используется как профиль/артикул для поиска остатков.' b=None i=None f=Times New Roman sz=12.0
+  26 [Normal] ind=None fi=None
+      TEXT: 'P3 — получение текущих остатков из Avito'
+      RUN: 'P3 — получение текущих остатков из ' b=True i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=True i=None f=Times New Roman sz=12.0
+  27 [Normal] ind=None fi=None
+      TEXT: 'Запускается команда:'
+      RUN: 'Запускается команда:' b=None i=None f=Times New Roman sz=12.0
+  28 [Normal] ind=None fi=None
+      TEXT: 'php bin/console app:get-all-stocks-command'
+      RUN: 'php' b=None i=None f=Courier New sz=10.0
+      RUN: ' bin/console ' b=None i=None f=Courier New sz=10.0
+      RUN: 'app:get-all-stocks-command' b=None i=None f=Courier New sz=10.0
+  29 [Normal] ind=None fi=None
+      TEXT: 'Команда вызывает сервис App\\Service\\Avito\\Test3.'
+      RUN: 'Команда вызывает сервис ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'App' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'Service' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'Avito' b=None i=None f=Courier New sz=10.0
+      RUN: '\Test3' b=None i=None f=Courier New sz=10.0
+      RUN: '.' b=None i=None f=Times New Roman sz=12.0
+  30 [Normal] ind=None fi=None
+      TEXT: 'Через Avito API заново выбираются все item IDs:'
+      RUN: 'Через ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' API заново выбираются все ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'item' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'IDs' b=None i=None f=Times New Roman sz=12.0
+      RUN: ':' b=None i=None f=Times New Roman sz=12.0
+  31 [Normal] ind=None fi=None
+      TEXT: 'GET /core/v1/items'
+      RUN: 'GET /' b=None i=None f=Courier New sz=10.0
+      RUN: 'core' b=None i=None f=Courier New sz=10.0
+      RUN: '/v1/' b=None i=None f=Courier New sz=10.0
+      RUN: 'items' b=None i=None f=Courier New sz=10.0
+  32 [Normal] ind=None fi=None
+      TEXT: 'Item IDs разбиваются на батчи.'
+      RUN: 'Item' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'IDs' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' разбиваются на ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'батчи' b=None i=None f=Times New Roman sz=12.0
+      RUN: '.' b=None i=None f=Times New Roman sz=12.0
+  33 [Normal] ind=None fi=None
+      TEXT: 'Для каждого батча вызывается:'
+      RUN: 'Для каждого ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'батча' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' вызывается:' b=None i=None f=Times New Roman sz=12.0
+  34 [Normal] ind=None fi=None
+      TEXT: 'POST /stock-management/1/info'
+      RUN: 'POST /' b=None i=None f=Courier New sz=10.0
+      RUN: 'stock-management' b=None i=None f=Courier New sz=10.0
+      RUN: '/1/' b=None i=None f=Courier New sz=10.0
+      RUN: 'info' b=None i=None f=Courier New sz=10.0
+  35 [Normal] ind=None fi=None
+      TEXT: 'Из ответа берётся item_id, quantity, isUnlimited, isMultiple, isOutOfStock.'
+      RUN: 'Из' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'ответа' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'берётся' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'item_id' b=None i=None f=Courier New sz=10.0
+      RUN: ', ' b=None i=None f=Times New Roman sz=12.0
+      ... +8 runs
+  36 [Normal] ind=None fi=None
+      TEXT: 'Таблица inventory_avito очищается.'
+      RUN: 'Таблица ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'inventory_avito' b=None i=None f=Courier New sz=10.0
+      RUN: ' очищается.' b=None i=None f=Times New Roman sz=12.0
+  37 [Normal] ind=None fi=None
+      TEXT: 'В inventory_avito записываются текущие остатки Avito: avito_id, quantity.'
+      RUN: 'В ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'inventory_avito' b=None i=None f=Courier New sz=10.0
+      RUN: ' записываются текущие остатки ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=None i=None f=Times New Roman sz=12.0
+      RUN: ': ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'avito_id' b=None i=None f=Courier New sz=10.0
+      RUN: ', ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'quantity' b=None i=None f=Courier New sz=10.0
+      ... +1 runs
+  38 [Normal] ind=None fi=None
+      TEXT: 'Результат P3: в inventory_avito лежит снимок остатков, которые сейчас видит Avito. В текущем дальнейшем потоке эта таблица напрямую не используется для P4-P6, скорее это контрольный/диагностический слой.'
+      RUN: 'Результат P3: в ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'inventory_avito' b=None i=None f=Courier New sz=10.0
+      RUN: ' лежит снимок остатков, которые сейчас видит ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=None i=None f=Times New Roman sz=12.0
+      RUN: '. В текущем дальнейшем потоке эта таблица напрямую не используется для P4-P6, скорее это контрольный/диагностический слой.' b=None i=None f=Times New Roman sz=12.0
+  39 [Normal] ind=None fi=None
+      TEXT: 'P4 — подготовка списка к обновлению остатков'
+      RUN: 'P4 — подготовка списка к обновлению остатков' b=True i=None f=Times New Roman sz=12.0
+  40 [Normal] ind=None fi=None
+      TEXT: 'Запускается команда:'
+      RUN: 'Запускается команда:' b=None i=None f=Times New Roman sz=12.0
+  41 [Normal] ind=None fi=None
+      TEXT: 'php bin/console app:step-prepare-list-command'
+      RUN: 'php' b=None i=None f=Courier New sz=10.0
+      RUN: ' bin/console ' b=None i=None f=Courier New sz=10.0
+      RUN: 'app:step-prepare-list-command' b=None i=None f=Courier New sz=10.0
+  42 [Normal] ind=None fi=None
+      TEXT: 'Команда вызывает сервис App\\Service\\Avito\\PrepareList.'
+      RUN: 'Команда вызывает сервис ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'App' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'Service' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'Avito' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'PrepareList' b=None i=None f=Courier New sz=10.0
+      ... +1 runs
+  43 [Normal] ind=None fi=None
+      TEXT: 'Из avito_product_list выбираются все товары.'
+      RUN: 'Из ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'avito_product_list' b=None i=None f=Courier New sz=10.0
+      RUN: ' выбираются все товары.' b=None i=None f=Times New Roman sz=12.0
+  44 [Normal] ind=None fi=None
+      TEXT: 'Таблица prepared_list очищается через:'
+      RUN: 'Таблица ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'prepared_list' b=None i=None f=Courier New sz=10.0
+      RUN: ' очищается через:' b=None i=None f=Times New Roman sz=12.0
+  45 [Normal] ind=None fi=None
+      TEXT: 'TRUNCATE TABLE public.prepared_list;'
+      RUN: 'TRUNCATE TABLE ' b=None i=None f=Courier New sz=10.0
+      RUN: 'public.prepared_list' b=None i=None f=Courier New sz=10.0
+      RUN: ';' b=None i=None f=Courier New sz=10.0
+  46 [Normal] ind=None fi=None
+      TEXT: 'Для каждого товара создаётся запись:'
+      RUN: 'Для каждого товара создаётся запись:' b=None i=None f=Times New Roman sz=12.0
+  47 [Normal] ind=None fi=None
+      TEXT: 'product_list_id = avito_product_list.id'
+      RUN: 'product_list_id' b=None i=None f=Courier New sz=10.0
+      RUN: ' = avito_product_list.id' b=None i=None f=Courier New sz=10.0
+  48 [Normal] ind=None fi=None
+      TEXT: 'product_id      = avito_product_list.avito_id'
+      RUN: 'product_id' b=None i=None f=Courier New sz=10.0
+      RUN: '      = ' b=None i=None f=Courier New sz=10.0
+      RUN: 'avito_product_list.avito_id' b=None i=None f=Courier New sz=10.0
+  49 [Normal] ind=None fi=None
+      TEXT: 'offer_id        = avito_product_list.ad_id'
+      RUN: 'offer_id' b=None i=None f=Courier New sz=10.0
+      RUN: '        = ' b=None i=None f=Courier New sz=10.0
+      RUN: 'avito_product_list.ad_id' b=None i=None f=Courier New sz=10.0
+  50 [Normal] ind=None fi=None
+      TEXT: 'kol             = 0'
+      RUN: 'kol' b=None i=None f=Courier New sz=10.0
+      RUN: '             = 0' b=None i=None f=Courier New sz=10.0
+  51 [Normal] ind=None fi=None
+      TEXT: 'Результат P4: сформирована таблица prepared_list со списком товаров для обновления, пока с нулевыми остатками.'
+      RUN: 'Результат P4: сформирована таблица ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'prepared_list' b=None i=None f=Courier New sz=10.0
+      RUN: ' со списком товаров для обновления, пока с нулевыми остатками.' b=None i=None f=Times New Roman sz=12.0
+  52 [Normal] ind=None fi=None
+      TEXT: 'P5 — получение складских остатков из ViewerClaim'
+      RUN: 'P5 — получение складских остатков из ' b=True i=None f=Times New Roman sz=12.0
+      RUN: 'ViewerClaim' b=True i=None f=Times New Roman sz=12.0
+  53 [Normal] ind=None fi=None
+      TEXT: 'Запускается команда:'
+      RUN: 'Запускается команда:' b=None i=None f=Times New Roman sz=12.0
+  54 [Normal] ind=None fi=None
+      TEXT: 'php bin/console app:step-prepare-list-set-kol-command'
+      RUN: 'php' b=None i=None f=Courier New sz=10.0
+      RUN: ' bin/console ' b=None i=None f=Courier New sz=10.0
+      RUN: 'app:step-prepare-list-set-kol-command' b=None i=None f=Courier New sz=10.0
+  55 [Normal] ind=None fi=None
+      TEXT: 'Команда вызывает сервис App\\Service\\Avito\\PrepareListKol.'
+      RUN: 'Команда вызывает сервис ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'App' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'Service' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'Avito' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'PrepareListKol' b=None i=None f=Courier New sz=10.0
+      ... +1 runs
+  56 [Normal] ind=None fi=None
+      TEXT: 'Из prepared_list выбираются все строки.'
+      RUN: 'Из ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'prepared_list' b=None i=None f=Courier New sz=10.0
+      RUN: ' выбираются все строки.' b=None i=None f=Times New Roman sz=12.0
+  57 [Normal] ind=None fi=None
+      TEXT: 'Из offer_id формируется список профилей.'
+      RUN: 'Из ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'offer_id' b=None i=None f=Courier New sz=10.0
+      RUN: ' формируется список профилей.' b=None i=None f=Times New Roman sz=12.0
+  58 [Normal] ind=None fi=None
+      TEXT: 'Каждый профиль дополняется пробелами слева до 6 символов.'
+      RUN: 'Каждый профиль дополняется пробелами слева до 6 символов.' b=None i=None f=Times New Roman sz=12.0
+  59 [Normal] ind=None fi=None
+      TEXT: 'Во второй БД ViewerClaim вызывается функция:'
+      RUN: 'Во второй БД ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'ViewerClaim' b=None i=None f=Courier New sz=10.0
+      RUN: ' вызывается функция:' b=None i=None f=Times New Roman sz=12.0
+  60 [Normal] ind=None fi=None
+      TEXT: 'SELECT * FROM get_total_kvo_by_profil_store19(:profiles)'
+      RUN: 'SELECT * FROM get_total_kvo_by_profil_' b=None i=None f=Courier New sz=10.0
+      RUN: 'store19(' b=None i=None f=Courier New sz=10.0
+      RUN: ':profiles)' b=None i=None f=Courier New sz=10.0
+  61 [Normal] ind=None fi=None
+      TEXT: 'Функция считает остатки по складу/подразделению 19.'
+      RUN: 'Функция считает остатки по складу/подразделению 19.' b=None i=None f=Times New Roman sz=12.0
+  62 [Normal] ind=None fi=None
+      TEXT: 'Для найденных профилей обновляется:'
+      RUN: 'Для найденных профилей обновляется:' b=None i=None f=Times New Roman sz=12.0
+  63 [Normal] ind=None fi=None
+      TEXT: 'prepared_list.kol = total_kvo'
+      RUN: 'prepared_list.kol' b=None i=None f=Courier New sz=10.0
+      RUN: ' = ' b=None i=None f=Courier New sz=10.0
+      RUN: 'total_kvo' b=None i=None f=Courier New sz=10.0
+  64 [Normal] ind=None fi=None
+      TEXT: 'Если профиль не найден в ViewerClaim, его kol остаётся 0.'
+      RUN: 'Если профиль не найден в ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'ViewerClaim' b=None i=None f=Courier New sz=10.0
+      RUN: ', его ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'kol' b=None i=None f=Courier New sz=10.0
+      RUN: ' остаётся ' b=None i=None f=Times New Roman sz=12.0
+      RUN: '0' b=None i=None f=Courier New sz=10.0
+      RUN: '.' b=None i=None f=Times New Roman sz=12.0
+  65 [Normal] ind=None fi=None
+      TEXT: 'Результат P5: в prepared_list заполнены актуальные складские остатки kol, которые P6 отправляет в Avito.'
+      RUN: 'Результат P5: в ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'prepared_list' b=None i=None f=Courier New sz=10.0
+      RUN: ' заполнены актуальные складские остатки ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'kol' b=None i=None f=Courier New sz=10.0
+      RUN: ', которые P6 отправляет в ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=None i=None f=Times New Roman sz=12.0
+      RUN: '.' b=None i=None f=Times New Roman sz=12.0
+  66 [Normal] ind=None fi=None
+      TEXT: 'P6 — обновление остатков на Avito'
+      RUN: 'P6 — обновление остатков на ' b=True i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=True i=None f=Times New Roman sz=12.0
+  67 [Normal] ind=None fi=None
+      TEXT: 'Запускается команда:'
+      RUN: 'Запускается команда:' b=None i=None f=Times New Roman sz=12.0
+  68 [Normal] ind=None fi=None
+      TEXT: 'php bin/console app:step_update_stocks-command'
+      RUN: 'php' b=None i=None f=Courier New sz=10.0
+      RUN: ' bin/console ' b=None i=None f=Courier New sz=10.0
+      RUN: 'app:step_update_stocks-command' b=None i=None f=Courier New sz=10.0
+  69 [Normal] ind=None fi=None
+      TEXT: 'Команда вызывает сервис App\\Service\\Avito\\UpdateStocks.'
+      RUN: 'Команда вызывает сервис ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'App' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'Service' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'Avito' b=None i=None f=Courier New sz=10.0
+      RUN: '\' b=None i=None f=Courier New sz=10.0
+      RUN: 'UpdateStocks' b=None i=None f=Courier New sz=10.0
+      ... +1 runs
+  70 [Normal] ind=None fi=None
+      TEXT: 'Из prepared_list выбираются товары с product_id, offer_id, kol.'
+      RUN: 'Из' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'prepared_list' b=None i=None f=Courier New sz=10.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'выбираются' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'товары' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' ' b=None i=None f=Times New Roman sz=12.0
+      ... +8 runs
+  71 [Normal] ind=None fi=None
+      TEXT: 'Формируется массив для Avito:'
+      RUN: 'Формируется массив для ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=None i=None f=Times New Roman sz=12.0
+      RUN: ':' b=None i=None f=Times New Roman sz=12.0
+  72 [Normal] ind=None fi=None
+      TEXT: 'item_id     = product_id'
+      RUN: 'item' b=None i=None f=Courier New sz=10.0
+      RUN: '_id' b=None i=None f=Courier New sz=10.0
+      RUN: '     = ' b=None i=None f=Courier New sz=10.0
+      RUN: 'product_id' b=None i=None f=Courier New sz=10.0
+  73 [Normal] ind=None fi=None
+      TEXT: 'external_id = offer_id'
+      RUN: 'external' b=None i=None f=Courier New sz=10.0
+      RUN: '_id' b=None i=None f=Courier New sz=10.0
+      RUN: ' = ' b=None i=None f=Courier New sz=10.0
+      RUN: 'offer_id' b=None i=None f=Courier New sz=10.0
+  74 [Normal] ind=None fi=None
+      TEXT: 'quantity    = kol'
+      RUN: 'quantity' b=None i=None f=Courier New sz=10.0
+      RUN: '    = ' b=None i=None f=Courier New sz=10.0
+      RUN: 'kol' b=None i=None f=Courier New sz=10.0
+  75 [Normal] ind=None fi=None
+      TEXT: 'Через Avito API вызывается:'
+      RUN: 'Через ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' API вызывается:' b=None i=None f=Times New Roman sz=12.0
+  76 [Normal] ind=None fi=None
+      TEXT: 'PUT /stock-management/1/stocks'
+      RUN: 'PUT /' b=None i=None f=Courier New sz=10.0
+      RUN: 'stock-management' b=None i=None f=Courier New sz=10.0
+      RUN: '/1/' b=None i=None f=Courier New sz=10.0
+      RUN: 'stocks' b=None i=None f=Courier New sz=10.0
+  77 [Normal] ind=None fi=None
+      TEXT: 'Ответ Avito сохраняется JSON-логом в:'
+      RUN: 'Ответ ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' сохраняется JSON-логом в:' b=None i=None f=Times New Roman sz=12.0
+  78 [Normal] ind=None fi=None
+      TEXT: 'var/logs/Command/UpdateStocks_*.json'
+      RUN: 'var' b=None i=None f=Courier New sz=10.0
+      RUN: '/' b=None i=None f=Courier New sz=10.0
+      RUN: 'logs' b=None i=None f=Courier New sz=10.0
+      RUN: '/' b=None i=None f=Courier New sz=10.0
+      RUN: 'Command' b=None i=None f=Courier New sz=10.0
+      RUN: '/' b=None i=None f=Courier New sz=10.0
+      RUN: 'UpdateStocks' b=None i=None f=Courier New sz=10.0
+      RUN: '_*.' b=None i=None f=Courier New sz=10.0
+      ... +1 runs
+  79 [Normal] ind=None fi=None
+      TEXT: 'Важный факт текущего кода: в updateStocksBatchWithRetry() сейчас стоит ограничение $k < 1, поэтому фактически отправляется только первый товар из общего списка.'
+      RUN: 'Важный факт текущего кода: в ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'updateStocksBatchWithRetry' b=None i=None f=Courier New sz=10.0
+      RUN: '(' b=None i=None f=Courier New sz=10.0
+      RUN: ')' b=None i=None f=Courier New sz=10.0
+      RUN: ' сейчас стоит ограничение ' b=None i=None f=Times New Roman sz=12.0
+      RUN: '$k < 1' b=None i=None f=Courier New sz=10.0
+      RUN: ', поэтому фактически отправляется только первый товар из общего списка.' b=None i=None f=Times New Roman sz=12.0
+  80 [Normal] ind=None fi=None
+      TEXT: 'Результат P6: Avito получает обновление остатков из prepared_list, но по текущей реализации реально обновляется только первая позиция.'
+      RUN: 'Результат P6: ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'Avito' b=None i=None f=Times New Roman sz=12.0
+      RUN: ' получает обновление остатков из ' b=None i=None f=Times New Roman sz=12.0
+      RUN: 'prepared_list' b=None i=None f=Courier New sz=10.0
+      RUN: ', но по текущей реализации реально обновляется только первая позиция.' b=None i=None f=Times New Roman sz=12.0
+  81 [empty] indent=None

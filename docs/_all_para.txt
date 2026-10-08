@@ -1,0 +1,136 @@
+0: Процессы интеграции Avito (P1–P10)
+1: Общие сведения
+2: Проект: cursSF64avitoP2 / sf64avitoP2
+3: Оркестратор: crone/Procedures/wh_stock_upd.php
+4: Источник P1–P6: диалог Project architecture analysis, 30.07.2026
+5: Дополнение P7–P10: taskp5362, актуальный cron (P4–P6 в cron active=0)
+6: P1 — получение списка товаров Avito
+8: 1.	Запускается команда:
+9: php bin/console app:get-all-products-command
+10: 2.	Команда вызывает сервис App\Service\Avito\Test2.
+11: 3.	Test2 создаёт AvitoStockApi с personal clientId/clientSecret из con
+12: 4.	Через Avito API вызывается:
+13: GET /core/v1/items?page=N&per_page=100
+14: 5.	Постранично собираются товары Avito: id, price, status, title, url.
+15: 6.	Таблица avito_product_list очищается.
+16: 7.	Все полученные товары записываются в avito_product_list, при этом a
+17: Результат P1: в avito_product_list лежит свежий список объявлений/това
+19: P2 — получение связки avito_id → ad_id
+21: 1.	Запускается команда:
+22: php bin/console app:get_adids-by-avitoids-command
+23: 2.	Команда вызывает сервис App\Service\Avito\AutoloadClient.
+24: 3.	Из avito_product_list выбираются все avito_id.
+25: 4.	Создаётся AvitoTokenManager, который берёт OAuth-токен из:
+26: src/ModuleAvito/Aion/pdata/avito_token.json
+27: 5.	Через Avito Autoload API вызывается:
+28: GET /autoload/v2/items/ad_ids?query=...
+29: 6.	Если Avito возвращает invalid access token, токен обновляется через
+30: 7.	Таблица products_map очищается.
+31: 8.	В products_map записываются пары avito_id, ad_id.
+32: 9.	avito_product_list.ad_id обновляется из products_map.
+33: Результат P2: у товаров в avito_product_list заполнен ad_id, который д
+35: P3 — получение текущих остатков из Avito
+37: 1.	Запускается команда:
+38: php bin/console app:get-all-stocks-command
+39: 2.	Команда вызывает сервис App\Service\Avito\Test3.
+40: 3.	Через Avito API заново выбираются все item IDs:
+41: GET /core/v1/items
+42: 4.	Item IDs разбиваются на батчи.
+43: 5.	Для каждого батча вызывается:
+44: POST /stock-management/1/info
+45: 6.	Из ответа берётся item_id, quantity, isUnlimited, isMultiple, isOut
+46: 7.	Таблица inventory_avito очищается.
+47: 8.	В inventory_avito записываются текущие остатки Avito: avito_id, qua
+48: Результат P3: в inventory_avito лежит снимок остатков, которые сейчас 
+50: P4 — подготовка списка к обновлению остатков (legacy, cron active=0)
+52: 1.	Запускается команда:
+53: php bin/console app:step-prepare-list-command
+54: 2.	Команда вызывает сервис App\Service\Avito\PrepareList.
+55: 3.	Из avito_product_list выбираются все товары.
+56: 4.	Таблица prepared_list очищается через:
+57: TRUNCATE TABLE public.prepared_list;
+58: 5.	Для каждого товара создаётся запись:
+59: product_list_id = avito_product_list.id
+60: product_id      = avito_product_list.avito_id
+61: offer_id        = avito_product_list.ad_id
+62: kol             = 0
+63: Результат P4: сформирована таблица prepared_list со списком товаров дл
+65: P5 — получение складских остатков из ViewerClaim (legacy, cron active=
+67: 1.	Запускается команда:
+68: php bin/console app:step-prepare-list-set-kol-command
+69: 2.	Команда вызывает сервис App\Service\Avito\PrepareListKol.
+70: 3.	Из prepared_list выбираются все строки.
+71: 4.	Из offer_id формируется список профилей.
+72: 5.	Каждый профиль дополняется пробелами слева до 6 символов.
+73: 6.	Во второй БД ViewerClaim вызывается функция:
+74: SELECT * FROM get_total_kvo_by_profil_store19(:profiles)
+75: 7.	Функция считает остатки по складу/подразделению 19.
+76: 8.	Для найденных профилей обновляется:
+77: prepared_list.kol = total_kvo
+78: 9.	Если профиль не найден в ViewerClaim, его kol остаётся 0.
+79: Результат P5: в prepared_list заполнены актуальные складские остатки k
+81: P6 — обновление остатков на Avito (legacy, cron active=0)
+83: 1.	Запускается команда:
+84: php bin/console app:step_update_stocks-command
+85: 2.	Команда вызывает сервис App\Service\Avito\UpdateStocks.
+86: 3.	Из prepared_list выбираются товары с product_id, offer_id, kol.
+87: 4.	Формируется массив для Avito:
+88: item_id     = product_id
+89: external_id = offer_id
+90: quantity    = kol
+91: 5.	Через Avito API вызывается:
+92: PUT /stock-management/1/stocks
+93: 6.	Ответ Avito сохраняется JSON-логом в:
+94: var/logs/Command/UpdateStocks_*.json
+95: 7.	Важный факт текущего кода: в updateStocksBatchWithRetry() сейчас ст
+96: Результат P6: Avito получает обновление остатков из prepared_list, но 
+98: P7 — подготовка списка для себестоимости (taskp5362, cron active=1)
+100: 1.	Запускается команда:
+101: php bin/console app:step-prepare-list-price-command
+102: 2.	Команда вызывает сервис App\Service\Avito\PrepareListPrice.
+103: 3.	Из avito_product_list выбираются все товары (Main::get_avito_produc
+104: 4.	Таблица prepared_list_price очищается (delete_prepared_list_price).
+105: 5.	Для каждого товара создаётся запись:
+106: product_list_id = avito_product_list.id
+107: product_id      = avito_product_list.avito_id
+108: offer_id        = avito_product_list.ad_id
+109: kol             = 0
+110: price           = 0
+111: Результат P7: staging-таблица prepared_list_price заполнена списком об
+113: P8 — kol и MinPrice из ViewerClaim (taskp5362, cron active=1)
+115: 1.	Запускается команда:
+116: php bin/console app:step-prepare-list-set-kol-with-price-command
+117: 2.	Команда вызывает сервис App\Service\Avito\PrepareListSetKolWithPric
+118: 3.	Main::PrepareListSetKolWithPrice() читает prepared_list_price, соби
+119: 4.	В БД ViewerClaim вызывается getStockWithPrice (остатки и MinPrice, 
+120: 5.	Для найденных профилей обновляется prepared_list_price:
+121: kol = total_kvo, price = MinPrice (если задан).
+122: Результат P8: в prepared_list_price актуальные kol и себестоимость (pr
+124: P9 — экспорт Excel себестоимости (taskp5362, cron active=1)
+126: 1.	Запускается команда:
+127: php bin/console app:step-export-avito-cost-price-excel-command
+128: 2.	Main::ExportAvitoCostPriceExcel() читает prepared_list_price.
+129: 3.	ExcelWriter пишет файл:
+130: src/ModuleAvito/Aion/pdata/sebestoimost_dlya_avito.xlsx
+131: Колонки: Номер объявления (product_id), ID объявления (offer_id), Себе
+132: Результат P9: xlsx в pdata готов для выгрузки.
+134: P10 — копия файла во внешнюю папку (taskp5362, cron active=1)
+136: 1.	Запускается команда:
+137: php bin/console app:step-send-avito-cost-price-file-command
+138: 2.	Main::SendAvitoCostPriceFile() читает байты sebestoimost_dlya_avito
+139: 3.	Имя файла: sebestoimost_{dmY_His по Europe/Moscow}.xlsx
+140: 4.	ExternalFolder::save_file() — file_put_contents:
+141: Windows: {project}/var/data/file/
+142: Linux: /var/www/txt_files3/
+143: Результат P10: файл себестоимости доступен внешней системе.
+146: ID диалогов Cursor по проекту (справочно)
+147: df87ff6c-b4d2-4393-8382-08edd8c877d8  Project architecture analysis
+148: 6b570f78-5d2a-48d2-856f-d5bb4ba974c4  (1) Project architecture analysi
+149: 6fa3d834-67e0-48bf-85a9-826cc7abc811  (2) Project architecture analysi
+150: 683e12a9-a807-40fb-a248-8f4222be2e8a  (3) Project architecture analysi
+151: c6b3318d-8010-4484-a3f4-1186e2fad8a7  (4) Project architecture analysi
+152: 089979a5-752d-47c9-834c-2b82fe5a8571  (5) Project architecture analysi
+153: 2af2dced-ec31-4f21-b836-5b20a7e689c3  (6) Project architecture analysi
+154: ad68f66e-e111-4ae9-a707-3656caf7e8a0  Avito product stock management
+155: 84eaded7-4ebe-4a89-88cc-37ff16a03b22  (1) Avito product stock manageme
+156: 9b4857d9-53c5-4fa5-9151-3f2f40aaab9a  (2) Avito product stock manageme

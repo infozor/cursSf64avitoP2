@@ -1,0 +1,82 @@
+  0 n=None l=None | sf64avitoP2 список поцессов
+  1 n=None l=None | P1 — получение списка товаров Avito
+  2 n=1 l=0 | Запускается команда:
+  3 n=None l=None | php bin/console app:get-all-products-command
+  4 n=2 l=0 | Команда вызывает сервис App\Service\Avito\Test2.
+  5 n=2 l=0 | Test2 создаёт AvitoStockApi с personal clientId/clientSecret из config.json.
+  6 n=2 l=0 | Через Avito API вызывается:
+  7 n=None l=None | GET /core/v1/items?page=N&per_page=100
+  8 n=3 l=0 | Постранично собираются товары Avito: id, price, status, title, url.
+  9 n=3 l=0 | Таблица avito_product_list очищается.
+ 10 n=3 l=0 | Все полученные товары записываются в avito_product_list, при этом ad_id = 0.
+ 11 n=None l=None | Результат P1: в avito_product_list лежит свежий список объявлений/товаров Avito. Дале
+ 12 n=None l=None | P2 — получение связки avito_id → ad_id
+ 13 n=4 l=0 | Запускается команда:
+ 14 n=None l=None | php bin/console app:get_adids-by-avitoids-command
+ 15 n=5 l=0 | Команда вызывает сервис App\Service\Avito\AutoloadClient.
+ 16 n=5 l=0 | Из avito_product_list выбираются все avito_id.
+ 17 n=5 l=0 | Создаётся AvitoTokenManager, который берёт OAuth-токен из:
+ 18 n=None l=None | src/ModuleAvito/Aion/pdata/avito_token.json
+ 19 n=6 l=0 | Через Avito Autoload API вызывается:
+ 20 n=None l=None | GET /autoload/v2/items/ad_ids?query=...
+ 21 n=7 l=0 | Если Avito возвращает invalid access token, токен обновляется через refresh token.
+ 22 n=7 l=0 | Таблица products_map очищается.
+ 23 n=7 l=0 | В products_map записываются пары avito_id, ad_id.
+ 24 n=7 l=0 | avito_product_list.ad_id обновляется из products_map.
+ 25 n=None l=None | Результат P2: у товаров в avito_product_list заполнен ad_id, который дальше используе
+ 26 n=None l=None | P3 — получение текущих остатков из Avito
+ 27 n=8 l=0 | Запускается команда:
+ 28 n=None l=None | php bin/console app:get-all-stocks-command
+ 29 n=9 l=0 | Команда вызывает сервис App\Service\Avito\Test3.
+ 30 n=9 l=0 | Через Avito API заново выбираются все item IDs:
+ 31 n=None l=None | GET /core/v1/items
+ 32 n=10 l=0 | Item IDs разбиваются на батчи.
+ 33 n=10 l=0 | Для каждого батча вызывается:
+ 34 n=None l=None | POST /stock-management/1/info
+ 35 n=11 l=0 | Из ответа берётся item_id, quantity, isUnlimited, isMultiple, isOutOfStock.
+ 36 n=11 l=0 | Таблица inventory_avito очищается.
+ 37 n=11 l=0 | В inventory_avito записываются текущие остатки Avito: avito_id, quantity.
+ 38 n=None l=None | Результат P3: в inventory_avito лежит снимок остатков, которые сейчас видит Avito. В 
+ 39 n=None l=None | P4 — подготовка списка к обновлению остатков
+ 40 n=12 l=0 | Запускается команда:
+ 41 n=None l=None | php bin/console app:step-prepare-list-command
+ 42 n=13 l=0 | Команда вызывает сервис App\Service\Avito\PrepareList.
+ 43 n=13 l=0 | Из avito_product_list выбираются все товары.
+ 44 n=13 l=0 | Таблица prepared_list очищается через:
+ 45 n=None l=None | TRUNCATE TABLE public.prepared_list;
+ 46 n=14 l=0 | Для каждого товара создаётся запись:
+ 47 n=None l=None | product_list_id = avito_product_list.id
+ 48 n=None l=None | product_id      = avito_product_list.avito_id
+ 49 n=None l=None | offer_id        = avito_product_list.ad_id
+ 50 n=None l=None | kol             = 0
+ 51 n=None l=None | Результат P4: сформирована таблица prepared_list со списком товаров для обновления, п
+ 52 n=None l=None | P5 — получение складских остатков из ViewerClaim
+ 53 n=15 l=0 | Запускается команда:
+ 54 n=None l=None | php bin/console app:step-prepare-list-set-kol-command
+ 55 n=16 l=0 | Команда вызывает сервис App\Service\Avito\PrepareListKol.
+ 56 n=16 l=0 | Из prepared_list выбираются все строки.
+ 57 n=16 l=0 | Из offer_id формируется список профилей.
+ 58 n=16 l=0 | Каждый профиль дополняется пробелами слева до 6 символов.
+ 59 n=16 l=0 | Во второй БД ViewerClaim вызывается функция:
+ 60 n=None l=None | SELECT * FROM get_total_kvo_by_profil_store19(:profiles)
+ 61 n=17 l=0 | Функция считает остатки по складу/подразделению 19.
+ 62 n=17 l=0 | Для найденных профилей обновляется:
+ 63 n=None l=None | prepared_list.kol = total_kvo
+ 64 n=18 l=0 | Если профиль не найден в ViewerClaim, его kol остаётся 0.
+ 65 n=None l=None | Результат P5: в prepared_list заполнены актуальные складские остатки kol, которые P6 
+ 66 n=None l=None | P6 — обновление остатков на Avito
+ 67 n=19 l=0 | Запускается команда:
+ 68 n=None l=None | php bin/console app:step_update_stocks-command
+ 69 n=20 l=0 | Команда вызывает сервис App\Service\Avito\UpdateStocks.
+ 70 n=20 l=0 | Из prepared_list выбираются товары с product_id, offer_id, kol.
+ 71 n=20 l=0 | Формируется массив для Avito:
+ 72 n=None l=None | item_id     = product_id
+ 73 n=None l=None | external_id = offer_id
+ 74 n=None l=None | quantity    = kol
+ 75 n=21 l=0 | Через Avito API вызывается:
+ 76 n=None l=None | PUT /stock-management/1/stocks
+ 77 n=22 l=0 | Ответ Avito сохраняется JSON-логом в:
+ 78 n=None l=None | var/logs/Command/UpdateStocks_*.json
+ 79 n=23 l=0 | Важный факт текущего кода: в updateStocksBatchWithRetry() сейчас стоит ограничение $k
+ 80 n=None l=None | Результат P6: Avito получает обновление остатков из prepared_list, но по текущей реал
+ 81 n=None l=None | 
